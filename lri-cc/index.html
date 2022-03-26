@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+<script src="lib/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="lib/plotly-binding-4.10.0/plotly.js"></script>
+<script src="lib/typedarray-0.1/typedarray.min.js"></script>
+<script src="lib/jquery-3.5.1/jquery.min.js"></script>
+<link href="lib/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="lib/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="lib/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="lib/plotly-main-2.5.1/plotly-latest.min.js"></script>
+  <style>
+body {
+  font-family: 'Poppins', sans-serif;
+  padding: 0px;
+  margin: 0px;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+}
+.table-container > * {
+  margin-left: 5px;
+  margin-right: 5px;
+  overflow-x:unset;
+  overflow-y:unset;
+}
+[class^='gt_'], [class*=' gt_']{
+  white-space: nowrap;
+}
+
+.header {
+  border-bottom: 1px solid #e7e7e7;
+  background: #90caf9;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.title {
+  background: #454545;
+  padding-left: 40px;
+  padding-right: 60px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title > div.condition {
+  font-size: 18px;
+}
+
+.title > div.cc {
+  font-size: 11px;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tabs > a > div.tab-item {
+  padding-top: 11px;
+  padding-bottom: 10px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tabs > a > div {
+  font-weight: 300;
+  font-size: 16px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.tabs > a {
+  text-decoration: none;
+  color: white;
+}
+
+.tab-item:hover {
+  background: #64b5f6;
+}
+
+.tabs > a > div.is-active {
+  border-bottom: 2px solid #1e88e5;
+  background: #42a5f5;
+}
+
+.plot-container {
+  width: 100%;
+  height: calc(60vh - 48px);
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.plot-container > div {
+  width: calc(50vw - 10px);
+}
+
+#notice {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: rgb(255, 255, 255, 0.4);
+  color: darkgray;
+  font-weight: 300;
+  font-size: 14px;
+  padding: 5px;
+}
+
+a {
+  color: black;
+}
+      </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&amp;amp;display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <div id="notice">
+    These results are produced using the 
+    <a href="https://github.com/ki-tools/champs-mortality">champs-mortality</a>
+     R package, which is under active development. The statistics provided have not been fully validated and should not yet be treated as reliable.
+  </div>
+  <div class="header">
+    <div class="title">
+      <div class="condition">Lower respiratory infections</div>
+      <div class="cc">In the causal chain</div>
+    </div>
+    <div class="tabs">
+      <a href="index.html">
+        <div class="tab-item is-active">Results</div>
+      </a>
+      <a href="fac_adj.html">
+        <div class="tab-item">Factor Adjustment Table</div>
+      </a>
+      <a href="stats_mits.html">
+        <div class="tab-item">MITS Selection Stats</div>
+      </a>
+      <a href="stats_cond.html">
+        <div class="tab-item">Condition Selection Stats</div>
+      </a>
+    </div>
+  </div>
+  <div class="plot-container">
+    <div>
+      <div id="htmlwidget-1306c006f803945cbce0" style="width:100%;height:100%;" class="plotly html-widget"></div>
+      <script type="application/json" data-for="htmlwidget-1306c006f803945cbce0">{"x":{"data":[{"x":[1.42,15.7,14.76,20.73,13.25,16.74,30.55],"y":[0.925,6.925,3.925,4.925,1.925,2.925,5.925],"text":["Bangladesh<br>(Baliakandi, Faridpur)<br>Crude: 1.42% (0.52, 3.3)","Ethiopia<br>(Haramaya, Harar, Kersa)<br>Crude: 15.7% (11.57, 20.67)","Kenya<br>(Manyatta, Siaya)<br>Crude: 14.76% (12.26, 17.58)","Mali<br>(Bamako)<br>Crude: 20.73% (16.26, 25.83)","Mozambique<br>(Manhica, Quelimane)<br>Crude: 13.25% (10.71, 16.18)","Sierra Leone<br>(Makeni)<br>Crude: 16.74% (12.98, 21.12)","South Africa<br>(Soweto)<br>Crude: 30.55% (27.66, 33.56)"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(78,121,167,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(78,121,167,1)"}},"hoveron":"points","name":"Crude","legendgroup":"Crude","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","opacity":1,"line":{"color":"transparent"},"error_x":{"array":[1.88,4.97,2.82,5.1,2.93,4.38,3.01],"arrayminus":[0.9,4.13,2.5,4.47,2.54,3.76,2.89],"type":"data","width":3.25925925925926,"symmetric":false,"color":"rgba(78,121,167,1)"},"frame":null},{"x":[4.34,60.86,18.98,22.59,15.59,16.11,27.11],"y":[1.075,7.075,4.075,5.075,2.075,3.075,6.075],"text":["Bangladesh<br>(Baliakandi, Faridpur)<br>Actual: 4.34% (3.43, 5.43)","Ethiopia<br>(Haramaya, Harar, Kersa)<br>Actual: 60.86% (58.62, 63.06)","Kenya<br>(Manyatta, Siaya)<br>Actual: 18.98% (17.46, 20.58)","Mali<br>(Bamako)<br>Actual: 22.59% (20.51, 24.79)","Mozambique<br>(Manhica, Quelimane)<br>Actual: 15.59% (13.93, 17.38)","Sierra Leone<br>(Makeni)<br>Actual: 16.11% (13.63, 18.87)","South Africa<br>(Soweto)<br>Actual: 27.11% (24.73, 29.59)"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(242,142,43,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(242,142,43,1)"}},"hoveron":"points","name":"Actual","legendgroup":"Actual","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","opacity":1,"line":{"color":"transparent"},"error_x":{"array":[1.09,2.2,1.6,2.2,1.79,2.76,2.48],"arrayminus":[0.91,2.24,1.52,2.08,1.66,2.48,2.38],"type":"data","width":3.25925925925926,"symmetric":false,"color":"rgba(242,142,43,1)"},"frame":null}],"layout":{"margin":{"t":35,"r":7.30593607305936,"b":39.252801992528,"l":150},"font":{"color":"rgba(0,0,0,1)","family":"Poppins, sans-serif","size":14.6118721461187},"title":{"text":"Cause-specfic mortality fractions (CSMF)","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-2.607,66.187],"tickmode":"array","ticktext":["0","20","40","60"],"tickvals":[0,20,40,60],"categoryorder":"array","categoryarray":["0","20","40","60"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Estimate, % (90% Bayesian CrI)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":false,"type":"linear","autorange":false,"range":[0.4,7.6],"tickmode":"array","ticktext":["Bangladesh<br>(Baliakandi, Faridpur)","Mozambique<br>(Manhica, Quelimane)","Sierra Leone<br>(Makeni)","Kenya<br>(Manyatta, Siaya)","Mali<br>(Bamako)","South Africa<br>(Soweto)","Ethiopia<br>(Haramaya, Harar, Kersa)"],"tickvals":[1,2,3,4,5,6,7],"categoryorder":"array","categoryarray":["Bangladesh<br>(Baliakandi, Faridpur)","Mozambique<br>(Manhica, Quelimane)","Sierra Leone<br>(Makeni)","Kenya<br>(Manyatta, Siaya)","Mali<br>(Bamako)","South Africa<br>(Soweto)","Ethiopia<br>(Haramaya, Harar, Kersa)"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,0.4667)","gridwidth":26.5670402656704,"zeroline":false,"anchor":"x","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"orientation":"h","xanchor":"center","x":0.5,"y":-0.12},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"modeBarButtonsToRemove":["zoom2d","pan2d","select2d","lasso2d","zoomIn2d","zoomOut2d","autoScale2d","resetScale2d","hoverClosestCartesian","hoverCompareCartesian"],"displaylogo":false,"responsive":true,"toImageButtonOptions":{"format":"png","filename":"custom_image","height":null,"width":null,"scale":2}},"source":"A","attrs":{"170234453e52b":{"xmin":{},"xmax":{},"colour":{},"text":{},"x":{},"y":{},"type":"scatter"},"170235fea8d18":{"xmin":{},"xmax":{},"colour":{},"text":{},"x":{},"y":{}}},"cur_data":"170234453e52b","visdat":{"170234453e52b":["function (y) ","x"],"170235fea8d18":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+    </div>
+    <div>
+      <div id="htmlwidget-335f3928d47773fdbc55" style="width:100%;height:100%;" class="plotly html-widget"></div>
+      <script type="application/json" data-for="htmlwidget-335f3928d47773fdbc55">{"x":{"data":[{"x":[6.59,184,192.49,113.16,154.01,163.49,355.84],"y":[0.925,6.925,3.925,4.925,1.925,2.925,5.925],"text":["Bangladesh<br>(Baliakandi, Faridpur)<br>Crude: 6.59 (2.39, 15.27)","Ethiopia<br>(Haramaya, Harar, Kersa)<br>Crude: 184 (135.62, 242.29)","Kenya<br>(Manyatta, Siaya)<br>Crude: 192.49 (159.87, 229.19)","Mali<br>(Bamako)<br>Crude: 113.16 (88.8, 141.03)","Mozambique<br>(Manhica, Quelimane)<br>Crude: 154.01 (124.41, 188)","Sierra Leone<br>(Makeni)<br>Crude: 163.49 (126.82, 206.25)","South Africa<br>(Soweto)<br>Crude: 355.84 (322.21, 390.94)"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(78,121,167,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(78,121,167,1)"}},"hoveron":"points","name":"Crude","legendgroup":"Crude","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","opacity":1,"line":{"color":"transparent"},"error_x":{"array":[8.68,58.29,36.7,27.87,33.99,42.76,35.1],"arrayminus":[4.2,48.38,32.62,24.36,29.6,36.67,33.63],"type":"data","width":3.25925925925926,"symmetric":false,"color":"rgba(78,121,167,1)"},"frame":null},{"x":[6.59,713.35,247.53,113.16,154.01,163.49,315.74],"y":[1.075,7.075,4.075,5.075,2.075,3.075,6.075],"text":["Bangladesh<br>(Baliakandi, Faridpur)<br>Actual: 6.59 (2.39, 15.27)","Ethiopia<br>(Haramaya, Harar, Kersa)<br>Actual: 713.35 (687.12, 739.17)","Kenya<br>(Manyatta, Siaya)<br>Actual: 247.53 (227.64, 268.43)","Mali<br>(Bamako)<br>Actual: 113.16 (88.8, 141.03)","Mozambique<br>(Manhica, Quelimane)<br>Actual: 154.01 (124.41, 188)","Sierra Leone<br>(Makeni)<br>Actual: 163.49 (126.82, 206.25)","South Africa<br>(Soweto)<br>Actual: 315.74 (288.09, 344.66)"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(242,142,43,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(242,142,43,1)"}},"hoveron":"points","name":"Actual","legendgroup":"Actual","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","opacity":1,"line":{"color":"transparent"},"error_x":{"array":[8.68,25.8199999999999,20.9,27.87,33.99,42.76,28.92],"arrayminus":[4.2,26.23,19.89,24.36,29.6,36.67,27.65],"type":"data","width":3.25925925925926,"symmetric":false,"color":"rgba(242,142,43,1)"},"frame":null}],"layout":{"margin":{"t":35,"r":7.30593607305936,"b":39.252801992528,"l":150},"font":{"color":"rgba(0,0,0,1)","family":"Poppins, sans-serif","size":14.6118721461187},"title":{"text":"Actual total under 5 mortality rates (TU5MR)","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-34.449,776.009],"tickmode":"array","ticktext":["0","200","400","600"],"tickvals":[0,200,400,600],"categoryorder":"array","categoryarray":["0","200","400","600"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Estimate, per 10,000 deaths (90% Bayesian CrI)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":false,"type":"linear","autorange":false,"range":[0.4,7.6],"tickmode":"array","ticktext":["Bangladesh<br>(Baliakandi, Faridpur)","Mozambique<br>(Manhica, Quelimane)","Sierra Leone<br>(Makeni)","Kenya<br>(Manyatta, Siaya)","Mali<br>(Bamako)","South Africa<br>(Soweto)","Ethiopia<br>(Haramaya, Harar, Kersa)"],"tickvals":[1,2,3,4,5,6,7],"categoryorder":"array","categoryarray":["Bangladesh<br>(Baliakandi, Faridpur)","Mozambique<br>(Manhica, Quelimane)","Sierra Leone<br>(Makeni)","Kenya<br>(Manyatta, Siaya)","Mali<br>(Bamako)","South Africa<br>(Soweto)","Ethiopia<br>(Haramaya, Harar, Kersa)"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,0.4667)","gridwidth":26.5670402656704,"zeroline":false,"anchor":"x","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"orientation":"h","xanchor":"center","x":0.5,"y":-0.12},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"modeBarButtonsToRemove":["zoom2d","pan2d","select2d","lasso2d","zoomIn2d","zoomOut2d","autoScale2d","resetScale2d","hoverClosestCartesian","hoverCompareCartesian"],"displaylogo":false,"responsive":true,"toImageButtonOptions":{"format":"png","filename":"custom_image","height":null,"width":null,"scale":2}},"source":"A","attrs":{"17023190e38a8":{"xmin":{},"xmax":{},"colour":{},"text":{},"x":{},"y":{},"type":"scatter"},"1702374a9aa71":{"xmin":{},"xmax":{},"colour":{},"text":{},"x":{},"y":{}}},"cur_data":"17023190e38a8","visdat":{"17023190e38a8":["function (y) ","x"],"1702374a9aa71":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+    </div>
+  </div>
+  <div>
+    <div id="qqfueakjuj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+      <style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#qqfueakjuj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qqfueakjuj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qqfueakjuj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qqfueakjuj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qqfueakjuj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qqfueakjuj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qqfueakjuj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 20px;
+  padding-right: 20px;
+  overflow-x: hidden;
+}
+
+#qqfueakjuj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qqfueakjuj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qqfueakjuj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qqfueakjuj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qqfueakjuj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qqfueakjuj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qqfueakjuj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qqfueakjuj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qqfueakjuj .gt_row {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qqfueakjuj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#qqfueakjuj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qqfueakjuj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qqfueakjuj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qqfueakjuj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qqfueakjuj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qqfueakjuj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qqfueakjuj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qqfueakjuj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qqfueakjuj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qqfueakjuj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qqfueakjuj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qqfueakjuj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qqfueakjuj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qqfueakjuj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qqfueakjuj .gt_left {
+  text-align: left;
+}
+
+#qqfueakjuj .gt_center {
+  text-align: center;
+}
+
+#qqfueakjuj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qqfueakjuj .gt_font_normal {
+  font-weight: normal;
+}
+
+#qqfueakjuj .gt_font_bold {
+  font-weight: bold;
+}
+
+#qqfueakjuj .gt_font_italic {
+  font-style: italic;
+}
+
+#qqfueakjuj .gt_super {
+  font-size: 65%;
+}
+
+#qqfueakjuj .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#qqfueakjuj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qqfueakjuj .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#qqfueakjuj .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#qqfueakjuj .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+      <table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><b>Site</b></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><b>Catchment</b></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1"><b>cCSMF (%)<br>(Bayesian CrI)</b></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1"><b>aCSMF (%)<br>(Bayesian CrI)</b></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1"><b>ACTU5MR</b></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1"><b>cCSMR (per 10k)<br>(Bayesian CrI)</b></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1"><b>aCSMR (per 10k)<br>(Bayesian CrI)</b></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">Bangladesh</td>
+<td class="gt_row gt_left">Baliakandi, Faridpur</td>
+<td class="gt_row gt_right">8.5 (5.8, 12.1)</td>
+<td class="gt_row gt_right">11.5 (10, 13.1)</td>
+<td class="gt_row gt_right">466</td>
+<td class="gt_row gt_right">39.7 (26.9, 56.4)</td>
+<td class="gt_row gt_right">39.7 (26.9, 56.4)</td></tr>
+    <tr><td class="gt_row gt_left">Ethiopia</td>
+<td class="gt_row gt_left">Haramaya, Harar, Kersa</td>
+<td class="gt_row gt_right">15.7 (11.6, 20.7)</td>
+<td class="gt_row gt_right">13.1 (11.7, 14.6)</td>
+<td class="gt_row gt_right">1305</td>
+<td class="gt_row gt_right">204.9 (151, 269.8)</td>
+<td class="gt_row gt_right">171.4 (153.2, 191)</td></tr>
+    <tr><td class="gt_row gt_left">Kenya</td>
+<td class="gt_row gt_left">Manyatta, Siaya</td>
+<td class="gt_row gt_right">4.6 (3.2, 6.3)</td>
+<td class="gt_row gt_right">5.9 (5.1, 6.8)</td>
+<td class="gt_row gt_right">1593</td>
+<td class="gt_row gt_right">72.9 (51, 101.1)</td>
+<td class="gt_row gt_right">94 (81.2, 108.3)</td></tr>
+    <tr><td class="gt_row gt_left">Mali</td>
+<td class="gt_row gt_left">Bamako</td>
+<td class="gt_row gt_right">17.6 (13.5, 22.5)</td>
+<td class="gt_row gt_right">16.9 (15, 18.8)</td>
+<td class="gt_row gt_right">546</td>
+<td class="gt_row gt_right">96.2 (73.6, 122.7)</td>
+<td class="gt_row gt_right">96.2 (73.6, 122.7)</td></tr>
+    <tr><td class="gt_row gt_left">Mozambique</td>
+<td class="gt_row gt_left">Manhica, Quelimane</td>
+<td class="gt_row gt_right">5.8 (4.1, 7.9)</td>
+<td class="gt_row gt_right">5.9 (4.9, 7.1)</td>
+<td class="gt_row gt_right">1249</td>
+<td class="gt_row gt_right">72.2 (51.5, 98.7)</td>
+<td class="gt_row gt_right">72.2 (51.5, 98.7)</td></tr>
+    <tr><td class="gt_row gt_left">Sierra Leone</td>
+<td class="gt_row gt_left">Makeni</td>
+<td class="gt_row gt_right">3.5 (1.9, 6)</td>
+<td class="gt_row gt_right">3.6 (2.5, 5.1)</td>
+<td class="gt_row gt_right">977</td>
+<td class="gt_row gt_right">34.4 (18.8, 58.5)</td>
+<td class="gt_row gt_right">34.4 (18.8, 58.5)</td></tr>
+    <tr><td class="gt_row gt_left">South Africa</td>
+<td class="gt_row gt_left">Soweto</td>
+<td class="gt_row gt_right">14 (11.9, 16.3)</td>
+<td class="gt_row gt_right">13 (11.4, 14.7)</td>
+<td class="gt_row gt_right">1430</td>
+<td class="gt_row gt_right">199.9 (169.8, 233.4)</td>
+<td class="gt_row gt_right">186 (163.4, 210.7)</td></tr>
+  </tbody>
+  
+  
+</table>
+    </div>
+  </div>
+</body>
+</html>
