@@ -36,7 +36,7 @@ dd <- process_data(cd_raw, start_year = 2017, end_year = 2020)
 # LRI in causal chain
 lri_cc <- get_rates_and_fractions(dd,
   condition = "Lower respiratory infections",
-  cond_name = "LRI"
+  cond_name_short = "LRI"
 )
 make_outputs(lri_cc, path = "lri-cc")
 
@@ -95,7 +95,7 @@ make_outputs(cbd_cc, path = "cbd-cc")
 # Neural tube defects in causal chain with custom age groups
 ntd_cc <- get_rates_and_fractions(dd,
   icd10_regex = "^Q00|^Q01|^Q05",
-  # cond_name = "Neural tube defects",
+  cond_name = "Neural tube defects",
   cond_name_short = "NTD",
   factor_groups = list(age = age_levels)
 )
@@ -105,7 +105,7 @@ make_outputs(ntd_cc, path = "ntd-cc")
 # and forcing to adjust by age
 ntd_cc_age <- get_rates_and_fractions(dd,
   icd10_regex = "^Q00|^Q01|^Q05",
-  # cond_name = "Neural tube defects",
+  cond_name = "Neural tube defects",
   cond_name_short = "NTD",
   adjust_vars_override = "age",
   factor_groups = list(age = age_levels)
