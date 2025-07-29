@@ -10,15 +10,15 @@ The examples below create the reports in this repository.
 
 The outputs of these can be viewed here:
 
-- https://ki-tools.github.io/champs-mortality-examples/lri-cc
-- https://ki-tools.github.io/champs-mortality-examples/lri-uc
-- https://ki-tools.github.io/champs-mortality-examples/maln-cc
-- https://ki-tools.github.io/champs-mortality-examples/maln-uc
-- https://ki-tools.github.io/champs-mortality-examples/hiv-cc
-- https://ki-tools.github.io/champs-mortality-examples/hiv-uc
-- https://ki-tools.github.io/champs-mortality-examples/cbd-cc
-- https://ki-tools.github.io/champs-mortality-examples/ntd-cc
-- https://ki-tools.github.io/champs-mortality-examples/ntd-cc-age
+- [https://ki-tools.github.io/champs-mortality-examples/lri-cc](https://ki-tools.github.io/champs-mortality-examples/lri-cc)
+- [https://ki-tools.github.io/champs-mortality-examples/lri-uc](https://ki-tools.github.io/champs-mortality-examples/lri-uc)
+- [https://ki-tools.github.io/champs-mortality-examples/maln-cc](https://ki-tools.github.io/champs-mortality-examples/maln-cc)
+- [https://ki-tools.github.io/champs-mortality-examples/maln-uc](https://ki-tools.github.io/champs-mortality-examples/maln-uc)
+- [https://ki-tools.github.io/champs-mortality-examples/hiv-cc](https://ki-tools.github.io/champs-mortality-examples/hiv-cc)
+- [https://ki-tools.github.io/champs-mortality-examples/hiv-uc](https://ki-tools.github.io/champs-mortality-examples/hiv-uc)
+- [https://ki-tools.github.io/champs-mortality-examples/cbd-cc](https://ki-tools.github.io/champs-mortality-examples/cbd-cc)
+- [https://ki-tools.github.io/champs-mortality-examples/ntd-cc](https://ki-tools.github.io/champs-mortality-examples/ntd-cc)
+- [https://ki-tools.github.io/champs-mortality-examples/ntd-cc-age](https://ki-tools.github.io/champs-mortality-examples/ntd-cc-age)
 
 <!-- 
 ```r
